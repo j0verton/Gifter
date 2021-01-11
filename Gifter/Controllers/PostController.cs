@@ -1,6 +1,7 @@
 ﻿using Gifter.Models;
 using Gifter.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Gifter.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostController : Controller
+    public class PostController : ControllerBase
     {
         private readonly IPostRepository _postRepository;
         public PostController(IPostRepository postRepository)
