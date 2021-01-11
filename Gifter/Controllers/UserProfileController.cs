@@ -35,5 +35,33 @@ namespace Gifter.Controllers
             }
             return Ok(post);
         }
+
+        [HttpPost]
+        public IActionResult Post(UserProfile up) 
+        {
+            _userProfileRepository.Add(up);
+            return CreatedAtAction("Get", new { id = up.Id }, up);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, UserProfile up)
+        {
+            if (id != up.Id)
+            {
+                return BadRequest();
+            }
+
+            _userProfileRepository.Update(up);
+            return NoContent();
+
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _userProfileRepository.Delete(id);
+            return NoContent();
+        }
+
     }
 }
