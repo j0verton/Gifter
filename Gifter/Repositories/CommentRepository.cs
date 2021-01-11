@@ -1,5 +1,6 @@
 ﻿using Gifter.Data;
 using Gifter.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Gifter.Repositories
 {
-    public class CommentRepository
+    public class CommentRepository : ICommentRepository
     {
         private readonly ApplicationDbContext _context;
         public CommentRepository(ApplicationDbContext context)
@@ -32,7 +33,13 @@ namespace Gifter.Repositories
                 .ToList();
         }
 
-        public Comment 
+        public Comment GetById(int id)
+        {
+            return _context.Comment
+                .Include(c => c.UserProfile)
+                .Include(c => c.Post)
+                .FirstOrDefault(c => c.Id == id);
+        }
 
     }
 }
