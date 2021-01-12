@@ -87,20 +87,21 @@ namespace Gifter.Controllers
             [HttpGet("hottest")]
             public IActionResult Hottest(string since)
             {
-            //try {
+            try
+            {
                 var startDate = DateTime.ParseExact(since, "M/d/yyyy", CultureInfo.InvariantCulture);
             var posts = _postRepository.Hottest(startDate);
             return Ok(posts);
-            //} 
-            //catch
-            //{
-            //    throw new HttpException(404,"please use M/d/yyyy format");
-            //    return HttpNotFound()
-            //}
-
-
-
             }
+            catch
+            {
+                return BadRequest("please use M/d/yyyy format");
+                
+                }
+
+
+
+        }
 
     }
 
