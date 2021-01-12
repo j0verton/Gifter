@@ -44,10 +44,15 @@ namespace Gifter.Repositories
             var userprofile = GetById(id);
             _context.UserProfile.Remove(userprofile);
 
-            var postsToDelete = _context.Post.Where(p => p.UserProfileId == userprofile.Id);
+            var commentToDelete = _context.Comment.Where(c => c.UserProfileId == userprofile.Id);
+            _context.Comment.RemoveRange(commentToDelete);
+
+            var postsToDelete = _context.Post.Include(p => p.Comments).Where(p => p.UserProfileId == userprofile.Id);
             _context.Post.RemoveRange(postsToDelete);
 
             _context.SaveChanges();
+
+            //alternatively add a list of all comments to UserProfile then single linq statement with .include u.comments .include u.posts .theninclude => p.comments
         }
 
     }

@@ -57,6 +57,19 @@ namespace Gifter.Repositories
             _context.SaveChanges();
         }
 
+        public List<Post> Search(string q, bool reverseOrder)
+        {
+            var query = _context.Post
+                .Where(p => p.Title.Contains(q));
 
+            if (reverseOrder == true)
+            {
+                return query.OrderBy(p => p.DateCreated).ToList();
+            }
+            else
+            {
+                return query.OrderByDescending(p => p.DateCreated).ToList();
+            }
+        }
     }
 }
