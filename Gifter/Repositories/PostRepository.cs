@@ -3,6 +3,7 @@ using Gifter.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -38,7 +39,7 @@ namespace Gifter.Repositories
                             .ToList();
         }
 
-        public void Add(Post post) 
+        public void Add(Post post)
         {
             _context.Add(post);
             _context.SaveChanges();
@@ -57,10 +58,11 @@ namespace Gifter.Repositories
             _context.SaveChanges();
         }
 
+        
         public List<Post> Search(string q, bool reverseOrder)
         {
             var query = _context.Post
-                .Where(p => p.Title.Contains(q));
+                .Where(p => p.Title.Contains(q) || p.Caption.Contains(q));
 
             if (reverseOrder == true)
             {
@@ -70,6 +72,13 @@ namespace Gifter.Repositories
             {
                 return query.OrderByDescending(p => p.DateCreated).ToList();
             }
+        }
+
+        
+        public List<Post> Hottest(DateTime since)
+        {
+            
+            return _context.Post.Where(p => p.DateCreated > since).ToList();
         }
     }
 }

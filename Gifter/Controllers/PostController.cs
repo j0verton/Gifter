@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace Gifter.Controllers
 {
@@ -70,7 +71,38 @@ namespace Gifter.Controllers
             return NoContent();
         }
 
+        [HttpGet("search")]
+        public IActionResult Search(string q, bool reverseOrder)
+        {
+            {
+                if (q == null)
+                {
+                    return Ok(_postRepository.GetAll());
+                }
 
+                var posts = _postRepository.Search(q, reverseOrder);
+                return Ok(posts);
+            }
+        }
+            [HttpGet("hottest")]
+            public IActionResult Hottest(string since)
+            {
+            try {
+                var startDate = DateTime.ParseExact(since, "M/d/yyyy", CultureInfo.InvariantCulture);
+                var posts = _postRepository.Hottest(startDate)
+            } 
+            catch
+            {
+                throw new HttpException(404,"please use M/d/yyyy format");
+                return HttpNotFound()
+            }
+
+
+
+        }
 
     }
+
+
+}
 }

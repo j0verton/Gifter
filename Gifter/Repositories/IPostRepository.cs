@@ -10,6 +10,8 @@ namespace Gifter.Repositories
         List<Post> GetAll();
         Post GetById(int id);
         List<Post> GetByUserProfileId(int id);
+        List<Post> Hottest(DateTime since);
+        List<Post> Search(string q, bool reverseOrder);
         void Update(Post post);
     }
 }
