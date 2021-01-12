@@ -13,5 +13,6 @@ namespace Gifter.Models
         public int PostId { get; set; }
         public Post Post { get; set; }
 
+        public string Message { get; set; }
     }
 }

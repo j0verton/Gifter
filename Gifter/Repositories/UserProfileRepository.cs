@@ -43,6 +43,10 @@ namespace Gifter.Repositories
         {
             var userprofile = GetById(id);
             _context.UserProfile.Remove(userprofile);
+
+            var postsToDelete = _context.Post.Where(p => p.UserProfileId == userprofile.Id);
+            _context.Post.RemoveRange(postsToDelete);
+
             _context.SaveChanges();
         }
 
