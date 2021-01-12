@@ -5,8 +5,11 @@ namespace Gifter.Repositories
 {
     public interface ICommentRepository
     {
+        void Add(Comment comment);
+        void Delete(int id);
         List<Comment> GetAll();
         Comment GetById(int id);
         List<Comment> GetCommentsByPostId(int id);
+        void Update(Comment comment);
     }
 }
