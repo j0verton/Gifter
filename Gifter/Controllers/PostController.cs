@@ -90,7 +90,7 @@ namespace Gifter.Controllers
             //try {
                 var startDate = DateTime.ParseExact(since, "M/d/yyyy", CultureInfo.InvariantCulture);
             var posts = _postRepository.Hottest(startDate);
-            return Ok(posts)
+            return Ok(posts);
             //} 
             //catch
             //{
@@ -100,10 +100,9 @@ namespace Gifter.Controllers
 
 
 
-        }
+            }
 
     }
 
 
-}
 }
