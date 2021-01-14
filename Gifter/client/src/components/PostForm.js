@@ -1,13 +1,33 @@
 import React, { useContext } from 'react'
-import { FormGroup, Form, Label, Input } from 'reactstrap'
+import { FormGroup, Form, Label, Input, Button } from 'reactstrap'
 
 const PostForm = () => {
 
-    useContext(PostList)
+    const addPost = (post) => {
+
+        return fetch('api/post', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(post)
+        })
+            .then(res => res.json());
+    }
+
+    const constructNewPost = e => {
+        const post = {
+            imageUrl, title, caption, UserProfileId: 
+
+    }
+
+    }
     return (
         <div className="container">
             <div className="row justify-content-center">
-                <Form>
+                <Form className="postForm"
+                    onSubmit={e => {
+                        e.preventDefault()
+                        constructNewPost()
+                    }}>
                     <FormGroup>
                         <Label for="title">Title
                         </Label>
@@ -34,7 +54,7 @@ const PostForm = () => {
                         <Input type="hidden" name="dateCreated" id="">Post Title
                         </Input>
                     </FormGroup>
-
+                    <Button type="submit"></Button>
                 </Form>
 
             </div>
