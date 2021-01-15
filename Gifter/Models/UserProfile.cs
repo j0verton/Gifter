@@ -19,6 +19,5 @@ namespace Gifter.Models
 
         [Required]
         public DateTime DateCreated { get; set; }
-        public DateTime CreateDateTime { get; internal set; }
     }
 }

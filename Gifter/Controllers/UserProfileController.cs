@@ -36,7 +36,7 @@ namespace Gifter.Controllers
         [HttpPost]
         public IActionResult Post(UserProfile userProfile)
         {
-            userProfile.CreateDateTime = DateTime.Now;
+            userProfile.DateCreated = DateTime.Now;
             _userProfileRepository.Add(userProfile);
             return Ok(userProfile);
         }
