@@ -26,6 +26,7 @@ namespace Gifter.Controllers
             return Ok(_userProfileRepository.GetAll());
         }
         [HttpGet("{id}")]
+
         [HttpGet("{firebaseUserId}")]
         public IActionResult GetUserProfile(string firebaseUserId)
         {
@@ -33,10 +34,11 @@ namespace Gifter.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(UserProfile up) 
+        public IActionResult Post(UserProfile userProfile)
         {
-            _userProfileRepository.Add(up);
-            return CreatedAtAction("Get", new { id = up.Id }, up);
+            userProfile.CreateDateTime = DateTime.Now;
+            _userProfileRepository.Add(userProfile);
+            return Ok(userProfile);
         }
 
         [HttpPut("{id}")]
