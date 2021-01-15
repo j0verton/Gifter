@@ -1,7 +1,24 @@
-import React, { useContext } from 'react'
-import { FormGroup, Form, Label, Input, Button } from 'reactstrap'
+import React, { useState } from "react";
+import {
+    Form,
+    FormGroup,
+    Card,
+    CardBody,
+    Label,
+    Input,
+    Button,
+} from "reactstrap";
+import { useHistory } from "react-router-dom";
 
 const PostForm = () => {
+
+    const [userProfileId, setUserProfileId] = useState("");
+    const [imageUrl, setImageUrl] = useState("");
+    const [title, setTitle] = useState("");
+    const [caption, setCaption] = useState("");
+
+    // Use this hook to allow us to programatically redirect users
+    const history = useHistory();
 
     const addPost = (post) => {
 
@@ -12,14 +29,19 @@ const PostForm = () => {
         })
             .then(res => res.json());
     }
+    const submit = (e) => {
+        const post = {
+            imageUrl,
+            title,
+            caption,
+            userProfileId: +userProfileId,
+        };
 
-    // const constructNewPost = e => {
-    //     const post = {
-    //         imageUrl, title, caption, UserProfileId: 
-
-    // }
-    //}
-
+        addPost(post).then((p) => {
+            // Navigate the user back to the home route
+            history.push("/");
+        });
+    };
 
     return (
         <div className="container">
