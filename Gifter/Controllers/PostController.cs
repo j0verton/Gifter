@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Globalization;
+using System.Security.Claims;
 
 namespace Gifter.Controllers
 {
@@ -15,9 +16,11 @@ namespace Gifter.Controllers
     public class PostController : ControllerBase
     {
         private readonly IPostRepository _postRepository;
-        public PostController(IPostRepository postRepository)
+        private readonly IUserProfileRepository _userProfileRepository;
+        public PostController(IPostRepository postRepository, IUserProfileRepository userProfileRepository )
         {
             _postRepository = postRepository;
+            _userProfileRepository = userProfileRepository;
         }
         [HttpGet]
         public IActionResult Get()
@@ -101,6 +104,12 @@ namespace Gifter.Controllers
 
 
 
+        }
+
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
         }
 
     }

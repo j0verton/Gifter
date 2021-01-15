@@ -4,7 +4,7 @@ import PostList from "./PostList";
 import PostForm from "./PostForm";
 import PostDetails from "./PostDetails"
 import Login from "./Login"
-import Register from "./Login"
+import Register from "./Register"
 
 
 const ApplicationViews = () => {
