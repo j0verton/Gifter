@@ -1,0 +1,2 @@
+ALTER TABLE UserProfile
+ADD FirebaseId VARCHAR(50);

@@ -60,6 +60,7 @@ namespace Gifter
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -67,5 +68,22 @@ namespace Gifter
                 endpoints.MapControllers();
             });
         }
+
+        var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
+        var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
+        services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+            options.Authority = googleTokenUrl;
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidIssuer = googleTokenUrl,
+                ValidateAudience = true,
+                ValidAudience = firebaseProjectId,
+                ValidateLifetime = true
+            };
+        });
     }
 }

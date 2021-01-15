@@ -13,20 +13,21 @@ const PostForm = () => {
             .then(res => res.json());
     }
 
-    const constructNewPost = e => {
-        const post = {
-            imageUrl, title, caption, UserProfileId: 
+    // const constructNewPost = e => {
+    //     const post = {
+    //         imageUrl, title, caption, UserProfileId: 
 
-    }
+    // }
+    //}
 
-    }
+
     return (
         <div className="container">
             <div className="row justify-content-center">
                 <Form className="postForm"
                     onSubmit={e => {
                         e.preventDefault()
-                        constructNewPost()
+                        // constructNewPost()
                     }}>
                     <FormGroup>
                         <Label for="title">Title
