@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Post from './Post'
 const PostList = () => {
-    const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState(null)
 
     useEffect(() => {
         fetch('/api/post')
@@ -9,6 +9,10 @@ const PostList = () => {
             .then(data => setPosts(data))
 
     }, []);
+
+    if (posts === null) {
+        return null
+    }
 
     return (
         <div className="container">
