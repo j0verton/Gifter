@@ -11,7 +11,6 @@ import {
 import { useHistory } from "react-router-dom";
 
 const PostForm = () => {
-
     const [userProfileId, setUserProfileId] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const [title, setTitle] = useState("");
@@ -21,14 +20,14 @@ const PostForm = () => {
     const history = useHistory();
 
     const addPost = (post) => {
-
-        return fetch('api/post', {
+        return fetch('/api/posts', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(post)
         })
             .then(res => res.json());
     }
+
     const submit = (e) => {
         const post = {
             imageUrl,
@@ -44,44 +43,45 @@ const PostForm = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container pt-4">
             <div className="row justify-content-center">
-                <Form className="postForm"
-                    onSubmit={e => {
-                        e.preventDefault()
-                        // constructNewPost()
-                    }}>
-                    <FormGroup>
-                        <Label for="title">Title
-                        </Label>
-                        <Input type="text" name="title" id="">Post Title
-                        </Input>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="imageUrl">Add a Gif Link
-                        </Label>
-                        <Input type="text" name="imageUrl" id="">https://media.giphy.com/media/XZrOvaUvmsCYL31HIe/giphy.gif
-                        </Input>
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="caption">Caption
-                        </Label>
-                        <Input type="text" name="caption" id="">Post Title
-                        </Input>
-                    </FormGroup>
-                    <FormGroup>
-                        <Input type="hidden" name="UserProfileId" id="">Post Title
-                        </Input>
-                    </FormGroup>
-                    <FormGroup>
-                        <Input type="hidden" name="dateCreated" id="">Post Title
-                        </Input>
-                    </FormGroup>
-                    <Button type="submit"></Button>
-                </Form>
-
+                <Card className="col-sm-12 col-lg-6">
+                    <CardBody>
+                        <Form>
+                            <FormGroup>
+                                <Label for="userId">User Id (For Now...)</Label>
+                                <Input
+                                    id="userId"
+                                    onChange={(e) => setUserProfileId(e.target.value)}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="imageUrl">Gif URL</Label>
+                                <Input
+                                    id="imageUrl"
+                                    onChange={(e) => setImageUrl(e.target.value)}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="title">Title</Label>
+                                <Input id="title" onChange={(e) => setTitle(e.target.value)} />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="caption">Caption</Label>
+                                <Input
+                                    id="caption"
+                                    onChange={(e) => setCaption(e.target.value)}
+                                />
+                            </FormGroup>
+                        </Form>
+                        <Button color="info" onClick={submit}>
+                            SUBMIT
+            </Button>
+                    </CardBody>
+                </Card>
             </div>
         </div>
-    )
-}
+    );
+};
+
 export default PostForm;
