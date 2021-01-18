@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
     Form,
     FormGroup,
@@ -9,8 +9,11 @@ import {
     Button,
 } from "reactstrap";
 import { useHistory } from "react-router-dom";
+import { UserProfileContext } from "../providers/UserProfileProvider";
+
 
 const PostForm = () => {
+    const { getToken } = useContext(UserProfileContext);
     const [userProfileId, setUserProfileId] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const [title, setTitle] = useState("");

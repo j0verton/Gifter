@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Gifter.Controllers
@@ -16,9 +17,11 @@ namespace Gifter.Controllers
     public class CommentController : ControllerBase
     {
         private readonly ICommentRepository _commentRepository;
-        public CommentController(ICommentRepository commentRepository)
+        private readonly IUserProfileRepository _userProfileRepository;
+        public CommentController(ICommentRepository commentRepository, IUserProfileRepository userProfileRepository)
         {
             _commentRepository = commentRepository;
+            _userProfileRepository = userProfileRepository;
         }
 
         [HttpGet]
