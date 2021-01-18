@@ -20,7 +20,7 @@ const PostForm = () => {
     const history = useHistory();
 
     const addPost = (post) => {
-        return fetch('/api/posts', {
+        return fetch('/api/post', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(post)
@@ -33,14 +33,21 @@ const PostForm = () => {
             imageUrl,
             title,
             caption,
-            userProfileId: +userProfileId,
+            userProfileId: getCurrentUserId()
         };
 
         addPost(post).then((p) => {
+
             // Navigate the user back to the home route
             history.push("/");
         });
     };
+
+    const getCurrentUserId = () => {
+        const currentUser = localStorage.getItem("userProfile")
+        const user = JSON.parse(currentUser)
+        return user.id
+    }
 
     return (
         <div className="container pt-4">
@@ -49,10 +56,9 @@ const PostForm = () => {
                     <CardBody>
                         <Form>
                             <FormGroup>
-                                <Label for="userId">User Id (For Now...)</Label>
                                 <Input
-                                    id="userId"
-                                    onChange={(e) => setUserProfileId(e.target.value)}
+                                    id="userId" type="hidden"
+                                    value={getCurrentUserId()}
                                 />
                             </FormGroup>
                             <FormGroup>

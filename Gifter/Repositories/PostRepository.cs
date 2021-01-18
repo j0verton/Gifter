@@ -44,8 +44,14 @@ namespace Gifter.Repositories
 
         public void Add(Post post)
         {
+            try { 
             _context.Add(post);
             _context.SaveChanges();
+            }
+            catch (Exception ex) 
+            { 
+                
+            }
         }
 
         public void Update(Post post)

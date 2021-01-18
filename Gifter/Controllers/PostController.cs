@@ -8,9 +8,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Globalization;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gifter.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PostController : ControllerBase
@@ -48,10 +50,11 @@ namespace Gifter.Controllers
 
 
         [HttpPost]
-        public IActionResult Post(Post post)
+        public IActionResult Add(Post post)
         {
+            post.DateCreated = DateTime.Now;
             _postRepository.Add(post);
-            return CreatedAtAction("Get", new { id = post.Id }, post);
+            return Ok(post);
 
         }
 

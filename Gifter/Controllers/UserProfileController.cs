@@ -19,13 +19,13 @@ namespace Gifter.Controllers
         {
             _userProfileRepository = userProfileRepository;
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult Get()
         {
             return Ok(_userProfileRepository.GetAll());
         }
-
+        
         [HttpGet("{firebaseUserId}")]
         public IActionResult GetUserProfile(string firebaseUserId)
         {
@@ -39,7 +39,7 @@ namespace Gifter.Controllers
             _userProfileRepository.Add(userProfile);
             return Ok(userProfile);
         }
-
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult Put(int id, UserProfile up)
         {
@@ -52,7 +52,7 @@ namespace Gifter.Controllers
             return NoContent();
 
         }
-
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
