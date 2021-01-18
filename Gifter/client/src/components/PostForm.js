@@ -35,8 +35,7 @@ const PostForm = () => {
         const post = {
             imageUrl,
             title,
-            caption,
-            userProfileId: getCurrentUserId()
+            caption
         };
 
         addPost(post).then((p) => {
@@ -46,11 +45,6 @@ const PostForm = () => {
         });
     };
 
-    const getCurrentUserId = () => {
-        const currentUser = localStorage.getItem("userProfile")
-        const user = JSON.parse(currentUser)
-        return user.id
-    }
 
     return (
         <div className="container pt-4">
@@ -58,12 +52,6 @@ const PostForm = () => {
                 <Card className="col-sm-12 col-lg-6">
                     <CardBody>
                         <Form>
-                            <FormGroup>
-                                <Input
-                                    id="userId" type="hidden"
-                                    value={getCurrentUserId()}
-                                />
-                            </FormGroup>
                             <FormGroup>
                                 <Label for="imageUrl">Gif URL</Label>
                                 <Input
